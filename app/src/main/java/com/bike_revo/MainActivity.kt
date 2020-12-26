@@ -51,7 +51,7 @@ class MainActivity : Activity(), OnMapReadyCallback, GoogleMap.OnCameraMoveListe
         mMapView?.getMapAsync(this)
 
         val recyclerView: RecyclerView = findViewById(R.id.vehicle_detail)
-        moviesAdapter = MoviesAdapter(movieList)
+        moviesAdapter = MoviesAdapter(this,movieList)
         val layoutManager = LinearLayoutManager(
             applicationContext,
             LinearLayoutManager.HORIZONTAL,

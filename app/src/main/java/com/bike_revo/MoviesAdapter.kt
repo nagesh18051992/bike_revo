@@ -1,5 +1,7 @@
 package com.bike_revo
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,14 +11,22 @@ import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 
 
-
-
-
-internal class MoviesAdapter(private var moviesList: List<MovieModel>) :
+internal class MoviesAdapter(var mContext: Context, private var moviesList: List<MovieModel>) :
     RecyclerView.Adapter<MoviesAdapter.MyViewHolder>() {
     internal inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var bike_name: TextView = view.findViewById(R.id.bike_name)
-        var bike_image: ImageView = view.findViewById(R.id.bike_image)
+
+        var bike_image: ImageView
+        var bike_name: TextView
+        init {
+            bike_image = view.findViewById(R.id.bike_image)
+            bike_name = view.findViewById(R.id.bike_name)
+
+
+            itemView.setOnClickListener {
+                mContext.startActivity(Intent(mContext,  Detailactivity::class.java))
+            }
+        }
+
     }
     @NonNull
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -28,6 +38,8 @@ internal class MoviesAdapter(private var moviesList: List<MovieModel>) :
         holder.bike_name.text = movie.getTitle()
         holder.bike_image.setImageResource(movie.getImageview()!!)
     }
+
+
     override fun getItemCount(): Int {
         return moviesList.size
     }
